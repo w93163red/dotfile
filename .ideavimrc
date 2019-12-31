@@ -1,0 +1,40 @@
+set hlsearch                    " highlight searches
+set incsearch                   " do incremental searching, search as you type
+set smartcase                   " no ignorecase if Uppercase char present
+set clipboard=unnamedplus  " 使用系统粘贴板(vim用y粘贴的内容也可以通过command + c 粘贴)
+set easymotion
+set showcmd
+set showmode
+nnoremap <SPACE> <Nop>
+let mapleader = ","
+set laststatus=2
+set ruler
+set statusline=%<[CFP=%F]%m%r%h%w\ [FMT=%{&fileformat}]\ [TYPE=%Y]\ [%.9b\ 0x%.9B]\ [CWD=%{getcwd()}]\ %=[%l,%c%V\ %p%%\ %P\ %LLs]
+set clipboard+=ideaput
+
+" Press `f` to activate AceJump
+map f :action AceAction<CR>
+" Press `F` to activate Target Mode
+map F :action AceTargetAction<CR>
+nnoremap <Space>lr :action Run<CR>
+" format the current paragraph
+vmap Q gq
+nmap Q gqap
+" key bindings for quickly moving between windows
+" h left, l right, k up, j down
+nnoremap <c-h> :action PreviousTab<cr>
+nnoremap <c-l> :action NextTab<cr>
+nmap <leader>k <c-w>k
+nmap <leader>j <c-w>j
+
+nmap gd :action GotoDeclaration<cr>
+nmap <c-o> :action Back<cr>
+nmap <leader>f :action Forward<cr>
+
+nmap <leader>t :action GotoFile<cr>
+nmap <leader>c :action GotoClass<cr>
+nmap <leader>ns :action GotoSymbol<cr>
+nmap <leader>fu :action FindUsages<cr>
+nmap <leader>nm :action FileStructurePopup<cr>
+nmap <leader>d :action ShowErrorDescription<cr>
+nmap == :action ReformatCode<cr>
