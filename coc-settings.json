@@ -1,0 +1,6 @@
+{
+    "rust-client.channel":"nightly",
+    "rust-analyzer.cargo-watch.command":"clippy",
+    "rust-analyzer.cargo-watch.enable": false
+}
+
