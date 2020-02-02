@@ -12,8 +12,6 @@
 #   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
 # then uncomment the following line to make Meta + arrow keys mapping work
 #set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
-
-
 # -- windows & pane creation ---------------------------------------------------
 
 # new window retains current path, possible values are:
@@ -180,8 +178,7 @@ tmux_conf_theme_right_separator_sub='|'
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
-tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{cpu_percentage} #{loadavg} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %b %d | #{username}#{root} | #{hostname} '
-# status left style
+tmux_conf_theme_status_right='#{pairing}#{synchronized} #{prefix_highlight} #{sysstat_cpu} #{sysstat_mem} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %b %d | #{username}#{root} | #{hostname} '
 tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
 tmux_conf_theme_status_left_bg='#ffff00,#ff00af,#00afff'  # yellow, pink, white blue
 tmux_conf_theme_status_left_attr='bold,none,none'
@@ -292,7 +289,7 @@ tmux_conf_copy_to_os_clipboard=false
 # bind C-a send-prefix
 
 # Configure view templates for tmux-plugin-sysstat "MEM" and "CPU" widget
-set -g @sysstat_mem_view_tmpl 'MEM:#[fg=#{mem.color}]#{mem.pused}#[default] #{mem.used}'
+set -g @sysstat_mem_view_tmpl 'MEM:#[fg=#{mem.color}]#{mem.pused}#[default]'
 #
 # Configure colors for tmux-plugin-sysstat "MEM" and "CPU" widget
 set -g @sysstat_cpu_color_low "$color_level_ok"
@@ -316,4 +313,4 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 run -b '~/.tmux/plugins/cpu-stats/cpu.tmux'
 run -b '~/.tmux/plugins/tpm/tpm'
 
-
+set -g mouse on
