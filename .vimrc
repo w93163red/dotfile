@@ -2,52 +2,65 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdcommenter'
-Plug 'yggdroot/leaderf'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'dyng/ctrlsf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'rust-lang/rust.vim'
-Plug 'majutsushi/tagbar'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'rafi/awesome-vim-colorschemes'
-Plug 'jiangmiao/auto-pairs'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'chriskempson/base16-vim'
-Plug 'terryma/vim-expand-region'
-Plug 'mengelbrecht/lightline-bufferline'
+Plug 'jiangmiao/auto-pairs'
+Plug 'liuchengxu/vista.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ap/vim-buftabline'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'ciaranm/detectindent'
 call plug#end()
 " colorscheme
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-default-dark 
 " keymap
-nnoremap <space>fT :NERDTreeToggle<CR>
+nnoremap <space>fT :NERDTreeFind<CR>
+nnoremap <space>fh :History<CR>
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
-nnoremap ]b :bn<CR>
-nnoremap [b :bp<CR>
+nmap <leader>cc   <Plug>NERDCommenterToggle
+vmap <leader>cc   <Plug>NERDCommenterToggle<CR>gv
+nnoremap ]b :bn!<CR>
+nnoremap [b :bp!<CR>
+nnoremap <space>b :Buffers<CR>
 nnoremap <leader>bd :bdelete<CR>
+nnoremap <space>ss :CocCommand session.save<CR>
+nnoremap <space>sl :CocCommand session.load<CR>
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
 " let g:Lf_ShortcutF = '<c-p>'
-map <c-p> :Clap files<CR>
-nnoremap <leader>ff :Leaderf gtags --all<CR>
 nnoremap <Tab> >>
 nnoremap <s-tab> <<
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 nnoremap <F6> :nohl<CR>
 nnoremap <s-F6> :LspRename<CR>
+inoremap jj <ESC>
+map <c-p> :FZF<CR>
+" map <c-f> <Plug>CtrlSFPrompt
+map <c-f> :Rg<CR>
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+xnoremap p pgvy
 if has('vim')
     set <a-cr>=^[^M
 endif
-map <F8> :TagbarToggle<CR>
-nmap <leader>sf  <Plug>CtrlSFPrompt
+map <F8> :Vista!!<CR>
 map <F5> :e!<CR>
 tnoremap <Esc> <C-\><C-n>
 nnoremap <F12> :vsplit term://zsh<CR> :vertical resize -10<CR>
@@ -55,6 +68,7 @@ nnoremap <F12> :vsplit term://zsh<CR> :vertical resize -10<CR>
 filetype plugin on
 syntax enable
 set showcmd
+set hidden
 set smartindent
 set incsearch
 set hlsearch
@@ -64,37 +78,41 @@ set shiftwidth=4
 set smarttab
 set expandtab
 set showtabline=2
-set hidden
 set mouse=a
 set nobackup
 set nowritebackup
 set cmdheight=2
 set updatetime=50
+set synmaxcol=200
 set signcolumn=yes
 set laststatus=2
-let base16colorspace=256
 set termguicolors
+hi LineNr ctermbg=NONE guibg=NONE
 set nowrap
 set signcolumn=yes
 set encoding=utf-8
 set vb t_vb= " No more beeps
-set synmaxcol=200
 set ttyfast
-set regexpengine=1
-" set relativenumber
+set relativenumber
 set number
 set cc=100
 set nofoldenable
 set autoread
 au CursorHold * checktime
 set shortmess+=c
-set re=1
 set lazyredraw
-set synmaxcol=128
 set splitright
-syntax sync minlines=256
-" NerdTree
-" Add spaces after comment delimiters by default
+autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
+" save the last edit position
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+" Enable true color 启用终端24位色
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+" " NerdTree
+" " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
@@ -110,52 +128,55 @@ let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 let g:nerdtree_tabs_autoclose = 1
-" LeaderF
-let g:LF_GtagsAutogenerate=1
-let g:Lf_Gtagslabel = 'native-pygments'
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_UseCache = 1
-let g:Lf_PreviewInPopup = 1
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "Monaco" }
-let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+
+" vim-clap
+let g:clap_layout = { 'relative': 'editor' }
+let g:clap_theme = 'material_design_dark'
 
 " statuslin" lightline
 let g:lightline = {
-  \ 'active': {
-  \   'left': [
-  \     [ 'mode', 'paste' ],
-  \     [ 'ctrlpmark', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
-  \   ],
-  \   'right':[
-  \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
-  \     [ 'blame' ]
-  \   ],
-  \ },
-  \ 'component_function': {
-  \   'blame': 'LightlineGitBlame',
-  \ },
-  \ 'tabline': {'left': [['buffers']], 'right': [['close']]} 
-  \ }
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
+            \ 'colorscheme': 'one',
+            \ 'active': {
+            \   'left': [
+            \     [ 'mode', 'paste', 'buffers' ],
+            \     [ 'gitbranch', 'diagnostic', 'cocstatus', 'filename', 'currentfunction', 'readonly', 'modified', 'method']
+            \   ],
+            \   'right':[
+            \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent', 'blame']
+            \   ],
+            \ },
+            \ 'component_function': {
+            \   'cocstatus': 'coc#status',
+            \   'currentfunction': 'CocCurrentFunction',
+            \   'gitbranch': 'FugitiveHead',
+            \   'blame': 'LightlineGitBlame',
+            \ },
+            \ 'component_expand': {
+            \   'buffers': 'lightlinebufferline'
+            \ },
+            \ 'component_type': {
+            \   'buffers': 'tabsel'
+            \ }
+            \ }
+
 function! LightlineGitBlame() abort
-  let blame = get(b:, 'coc_git_blame', '')
-  " return blame
-  return winwidth(0) > 120 ? blame : ''
+    let blame = get(b:, 'coc_git_blame', '')
+    " return blame
+    return winwidth(0) > 120 ? blame : ''
 endfunction
 
 " CoC Language Server
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -181,11 +202,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
@@ -199,11 +220,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
@@ -240,19 +261,6 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \ },
-      \ }
-
-
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -273,3 +281,42 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " fmt on save
 let g:rustfmt_autosave=1
+" FZF
+nnoremap <silent> <c-p> :Files <CR>
+
+"autoindent
+autocmd BufReadPost * :DetectIndent 
+
+" git 
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <space>gp :Git Push origin HEAD:refs/for/master<CR> 
+
+"expand region
+let g:expand_region_text_objects = {
+      \ 'iw'  :1,
+      \ 'iW'  :1,
+      \ 'i"'  :1,
+      \ 'i''' :1,
+      \ '''i]'  :1, 
+      \ 'ib'  :1, 
+      \ 'iB'  :1, 
+      \ 'il'  :0, 
+      \ 'ip'  :0,
+      \ 'ie'  :0, 
+      \} 
+
+let g:airline#extensions#tabline#enabled = 1 "enable the tabline
+let g:airline#extensions#tabline#fnamemod = ':t' " show just the filename of buffers in the tab line
+let g:airline_detect_modified=1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" rust-ctags
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+
+
+"neovide
+let g:neovide_cursor_vfx_mode = "pixiedust" 

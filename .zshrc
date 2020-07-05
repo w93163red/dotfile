@@ -102,10 +102,41 @@ source $ZSH/oh-my-zsh.sh
 source /Users/lingxiangwang/Downloads/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/lingxiangwang/.lconfig
 alias vim="/usr/local/bin/vim"
-alias devbox="ssh lingxiang.wang@10.227.5.192"
-export PATH="$HOME/.cargo/bin:/usr/local/bin:/Users/lingxiangwang/.nvm/versions/node/v10.15.3/bin:$HOME/go/bin:/System/Volumes/Data/Users/lingxiangwang/Library/Python/3.7/bin:$PATH"
+alias devbox="ssh root@10.231.250.15"
+alias boe="ssh ling@10.231.25.211"
+export PATH="$HOME/.cargo/bin:/usr/local/bin:/Users/lingxiangwang/.nvm/versions/node/v10.15.3/bin:$HOME/go/bin:/System/Volumes/Data/Users/lingxiangwang/Library/Python/3.7/bin:/usr/local/Cellar/llvm/10.0.0_3/bin:$HOME/code/kcov/src/Release/:echo 'update brew'
+
+brew update
+
+echo 'upgrade brew'
+
+brew upgrade
+
+echo 'brew install openssl'
+
+brew install openssl@1.1
+
+:$PATH"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 # export NVM_DIR='$HOME/.nvm'
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export USER_ID='6768506673096032519'
+export access_token='XN0YXJ0-11db243b-9f1c-4e97-9973-851e1c29350g-WVuZA'
+export FFMPEG_DIR=/Users/lingxiangwang/code/rust-sdk/deps/ffmpeg/mac 
+export FFMPEG_CONFIG_PATH=/Users/lingxiangwang/code/rust-sdk/deps/ffmpeg/mac/config.mak 
+export FFMPEG_LIB_NAME=rust_ffmpeg 
+export DYLD_LIBRARY_PATH=/Users/lingxiangwang/code/rust-sdk/deps/ffmpeg/mac/lib:/Users/lingxiangwang/code/rust-sdk/deps/cronet/darwin/
+export RUST_SDK=~/code/rust-sdk/
+alias vim='nvim'
+alias update_sub="git submodule update --recursive --remote"
+alias git_push='git push origin HEAD:refs/for/master'
+alias git_wip='git push origin HEAD:refs/for/master%wip'
+alias micro='/Users/lingxiangwang/micro'
+alias alacritty='/Applications/Alacritty.app/Contents/MacOS/alacritty'
+export OPENSSL_ROOT_DIR='/usr/local/opt/openssl@1.1'
+
 
