@@ -124,8 +124,6 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-export USER_ID='6768506673096032519'
-export access_token='XN0YXJ0-11db243b-9f1c-4e97-9973-851e1c29350g-WVuZA'
 export FFMPEG_DIR=/Users/lingxiangwang/code/rust-sdk/deps/ffmpeg/mac 
 export FFMPEG_CONFIG_PATH=/Users/lingxiangwang/code/rust-sdk/deps/ffmpeg/mac/config.mak 
 export FFMPEG_LIB_NAME=rust_ffmpeg 
