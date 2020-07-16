@@ -5,6 +5,7 @@ Plug 'preservim/nerdtree'
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mkitt/tabline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'dyng/ctrlsf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
@@ -14,11 +15,16 @@ Plug 'chriskempson/base16-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'ap/vim-buftabline'
+Plug 'easymotion/vim-easymotion'
+Plug 'wakatime/vim-wakatime'
+" Plug 'ap/vim-buftabline'
 Plug 'airblade/vim-gitgutter'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ciaranm/detectindent'
+Plug 'mhinz/vim-startify'
+Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 " colorscheme
 colorscheme base16-default-dark 
@@ -40,7 +46,7 @@ nnoremap L $
 vnoremap H ^
 vnoremap L $
 " let g:Lf_ShortcutF = '<c-p>'
-nnoremap <Tab> >>
+noremap <Tab> >>
 nnoremap <s-tab> <<
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -48,14 +54,16 @@ nnoremap <F6> :nohl<CR>
 nnoremap <s-F6> :LspRename<CR>
 inoremap jj <ESC>
 map <c-p> :FZF<CR>
-" map <c-f> <Plug>CtrlSFPrompt
 map <c-f> :Rg<CR>
+map <space>t :Tags<CR>
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 xnoremap p pgvy
 if has('vim')
     set <a-cr>=^[^M
@@ -93,7 +101,7 @@ set signcolumn=yes
 set encoding=utf-8
 set vb t_vb= " No more beeps
 set ttyfast
-set relativenumber
+" set relativenumber
 set number
 set cc=100
 set nofoldenable
@@ -134,36 +142,36 @@ let g:clap_layout = { 'relative': 'editor' }
 let g:clap_theme = 'material_design_dark'
 
 " statuslin" lightline
-let g:lightline = {
-            \ 'colorscheme': 'one',
-            \ 'active': {
-            \   'left': [
-            \     [ 'mode', 'paste', 'buffers' ],
-            \     [ 'gitbranch', 'diagnostic', 'cocstatus', 'filename', 'currentfunction', 'readonly', 'modified', 'method']
-            \   ],
-            \   'right':[
-            \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent', 'blame']
-            \   ],
-            \ },
-            \ 'component_function': {
-            \   'cocstatus': 'coc#status',
-            \   'currentfunction': 'CocCurrentFunction',
-            \   'gitbranch': 'FugitiveHead',
-            \   'blame': 'LightlineGitBlame',
-            \ },
-            \ 'component_expand': {
-            \   'buffers': 'lightlinebufferline'
-            \ },
-            \ 'component_type': {
-            \   'buffers': 'tabsel'
-            \ }
-            \ }
-
-function! LightlineGitBlame() abort
-    let blame = get(b:, 'coc_git_blame', '')
-    " return blame
-    return winwidth(0) > 120 ? blame : ''
-endfunction
+" let g:lightline = {
+"             \ 'colorscheme': 'one',
+"             \ 'active': {
+"             \   'left': [
+"             \     [ 'mode', 'paste', 'buffers' ],
+"             \     [ 'gitbranch', 'diagnostic', 'cocstatus', 'filename', 'currentfunction', 'readonly', 'modified', 'method']
+"             \   ],
+"             \   'right':[
+"             \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent', 'blame']
+"             \   ],
+"             \ },
+"             \ 'component_function': {
+"             \   'cocstatus': 'coc#status',
+"             \   'currentfunction': 'CocCurrentFunction',
+"             \   'gitbranch': 'FugitiveHead',
+"             \   'blame': 'LightlineGitBlame',
+"             \ },
+"             \ 'component_expand': {
+"             \   'buffers': 'lightlinebufferline'
+"             \ },
+"             \ 'component_type': {
+"             \   'buffers': 'tabsel'
+"             \ }
+"             \ }
+"
+" function! LightlineGitBlame() abort
+"     let blame = get(b:, 'coc_git_blame', '')
+"     " return blame
+"     return winwidth(0) > 120 ? blame : ''
+" endfunction
 
 " CoC Language Server
 " Use tab for trigger completion with characters ahead and navigate.
@@ -293,28 +301,96 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <space>gp :Git Push origin HEAD:refs/for/master<CR> 
 
-"expand region
-let g:expand_region_text_objects = {
-      \ 'iw'  :1,
-      \ 'iW'  :1,
-      \ 'i"'  :1,
-      \ 'i''' :1,
-      \ '''i]'  :1, 
-      \ 'ib'  :1, 
-      \ 'iB'  :1, 
-      \ 'il'  :0, 
-      \ 'ip'  :0,
-      \ 'ie'  :0, 
-      \} 
-
+" airline
 let g:airline#extensions#tabline#enabled = 1 "enable the tabline
-let g:airline#extensions#tabline#fnamemod = ':t' " show just the filename of buffers in the tab line
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#fnamemod = 'default'
 let g:airline_detect_modified=1
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_idx_format = {
+        \ '0': '0 ',
+        \ '1': '1 ',
+        \ '2': '2 ',
+        \ '3': '3 ',
+        \ '4': '4 ',
+        \ '5': '5 ',
+        \ '6': '6 ',
+        \ '7': '7 ',
+        \ '8': '8 ',
+        \ '9': '9 '
+        \}
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 
 " rust-ctags
-autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+" autocmd BufWritePost *.rs :AsyncRun! rusty-tags vi --quiet --start-dir="%:p:h"
 
+"neovide
+let g:neovide_cursor_vfx_mode = "pixiedust" 
 
+" asyncrun
+let g:asyncrun_status = ''
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
+" gutentags
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'target',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx'
+      \ ]
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
