@@ -12,10 +12,6 @@ set ruler
 set statusline=%<[CFP=%F]%m%r%h%w\ [FMT=%{&fileformat}]\ [TYPE=%Y]\ [%.9b\ 0x%.9B]\ [CWD=%{getcwd()}]\ %=[%l,%c%V\ %p%%\ %P\ %LLs]
 set clipboard+=ideaput
 
-" Press `f` to activate AceJump
-map f :action AceAction<CR>
-" Press `F` to activate Target Mode
-map F :action AceTargetAction<CR>
 nnoremap <Space>lr :action Run<CR>
 " format the current paragraph
 vmap Q gq
