@@ -5,13 +5,16 @@ Plug 'preservim/nerdtree'
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mkitt/tabline.vim'
+" Plug 'mkitt/tabline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'dyng/ctrlsf.vim'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'rust-lang/rust.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'chriskempson/base16-vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -26,9 +29,9 @@ Plug 'mhinz/vim-startify'
 Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 " colorscheme
-colorscheme base16-default-dark 
+colorscheme base16-default-dark
 " keymap
-nnoremap <space>fT :NERDTreeFind<CR>
+nnoremap <space>fT :CocCommand explorer --sources=buffer+,file+<CR>
 nnoremap <space>fh :History<CR>
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
@@ -43,7 +46,7 @@ nnoremap <space>sl :CocCommand session.load<CR>
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
-vnoremap L $
+vnoremap L g_
 " let g:Lf_ShortcutF = '<c-p>'
 noremap <Tab> >>
 nnoremap <s-tab> <<
@@ -52,9 +55,8 @@ vnoremap <S-Tab> <gv
 nnoremap <F6> :nohl<CR>
 nnoremap <s-F6> :LspRename<CR>
 inoremap jj <ESC>
-map <c-p> :FZF<CR>
-map <c-f> :Rg<CR>
-map <space>t :Tags<CR>
+" map <c-p> :FZF<CR>
+nmap <C-F>f <Plug>CtrlSFPrompt
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -65,7 +67,7 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 xnoremap p pgvy
 if has('vim')
-    set <a-cr>=^[^M
+  set <a-cr>=^[^M
 endif
 map <F8> :Vista!!<CR>
 map <F5> :e!<CR>
@@ -84,17 +86,19 @@ set tabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
-set showtabline=2
+" set showtabline=2
 set mouse=a
 set nobackup
 set nowritebackup
 set cmdheight=2
 set updatetime=50
 set synmaxcol=200
+set scrolloff=5
 set signcolumn=yes
 set laststatus=2
 set termguicolors
 hi LineNr ctermbg=NONE guibg=NONE
+" hi Pmenu ctermbg=NONE guibg=NONE
 set nowrap
 set signcolumn=yes
 set encoding=utf-8
@@ -102,7 +106,7 @@ set vb t_vb= " No more beeps
 set ttyfast
 " set relativenumber
 set number
-set cc=100
+" set cc=100
 set nofoldenable
 set autoread
 au CursorHold * checktime
@@ -114,9 +118,9 @@ autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 " Enable true color 启用终端24位色
 if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 endif
 " " NerdTree
 " " Add spaces after comment delimiters by default
@@ -176,14 +180,14 @@ let g:clap_theme = 'material_design_dark'
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -209,11 +213,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
+  if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+  else
+      call CocAction('doHover')
+  endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
@@ -227,11 +231,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
@@ -265,7 +269,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
+  return get(b:, 'coc_current_function', '')
 endfunction
 
 " Using CocList
@@ -286,10 +290,26 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <c-f> :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+
+
 " fmt on save
 let g:rustfmt_autosave=1
 " FZF
-nnoremap <silent> <c-p> :Files <CR>
+nnoremap <silent> <c-p> :GFiles <CR>
 
 "autoindent
 autocmd BufReadPost * :DetectIndent 
@@ -298,10 +318,11 @@ autocmd BufReadPost * :DetectIndent
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Gpush<CR>
-nnoremap <space>gp :Git Push origin HEAD:refs/for/master<CR> 
+" nnoremap <space>gp :Git Push origin HEAD:refs/for/master<CR>
 
 " airline
-let g:airline#extensions#tabline#enabled = 1 "enable the tabline
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#tabline#enabled = 0 "enable the tabline
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -393,3 +414,54 @@ let g:gutentags_ctags_exclude = [
       \ ]
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', '.git']
+
+" tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
+" coc-explorer
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'cocConfig': {
+\      'root-uri': '~/.config/coc',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\ }
+
+"auto restart
+autocmd User CocNvimInit :CocCommand explorer --sources=buffer+,file+
+
+let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-prettier', 'coc-actions', 'coc-rust-analyzer', 'coc-python', 'coc-tsserver', 'coc-eslint']
+
+
