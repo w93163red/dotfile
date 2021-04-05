@@ -2,6 +2,7 @@ if !exists('g:vscode')
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
 	let &packpath = &runtimepath
 	source ~/.vimrc
+	lua require'bufferline'.setup{}
 else
 	nnoremap ]b :bn!<CR>
 	nnoremap [b :bp!<CR>

@@ -27,6 +27,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'ciaranm/detectindent'
 Plug 'mhinz/vim-startify'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'qpkorr/vim-bufkill'
+Plug 'akinsho/nvim-bufferline.lua'
 call plug#end()
 " colorscheme
 colorscheme base16-default-dark
@@ -40,7 +42,7 @@ vmap <leader>cc   <Plug>NERDCommenterToggle<CR>gv
 nnoremap ]b :bn!<CR>
 nnoremap [b :bp!<CR>
 nnoremap <space>b :Buffers<CR>
-nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bd :BD<CR>
 nnoremap <space>ss :CocCommand session.save<CR>
 nnoremap <space>sl :CocCommand session.load<CR>
 nnoremap H ^
@@ -458,9 +460,6 @@ let g:coc_explorer_global_presets = {
 \     'sources': [{'name': 'buffer', 'expand': v:true}]
 \   },
 \ }
-
-"auto restart
-autocmd User CocNvimInit :CocCommand explorer --sources=buffer+,file+
 
 let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-prettier', 'coc-actions', 'coc-rust-analyzer', 'coc-python', 'coc-tsserver', 'coc-eslint']
 
