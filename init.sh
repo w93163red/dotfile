@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # dependencies
 sudo apt install -y git curl wget tmux python universal-ctags zsh autojump
