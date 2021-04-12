@@ -105,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 alias devbox="ssh root@10.231.250.15"
 alias boe="ssh ling@10.231.25.211"
 alias ls=exa
-export NVM_DIR='$HOME/.nvm'
+export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . /usr/share/autojump/autojump.sh
