@@ -72,6 +72,7 @@ ZSH_THEME="ys"
 plugins=(
   git 
   extract
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
