@@ -22,9 +22,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 sudo wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -P /usr/local/bin
 sudo mv /usr/local/bin/nvim.appimage /usr/local/bin/nvim
 sudo chmod +x /usr/local/bin/nvim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 source ~/.zshrc
 cargo install exa bat
-nvm install lts
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+nvm install --lts
+
