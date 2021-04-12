@@ -107,8 +107,7 @@ alias ls=exa
 export NVM_DIR='$HOME/.nvm'
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+. /usr/share/autojump/autojump.sh
 alias vim='nvim'
 alias update_sub="git submodule update --recursive --remote"
 alias git_push='git push origin HEAD:refs/for/master'
