@@ -12,7 +12,7 @@ cp .tmux.conf .tmux.conf.local ~/
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
 cp .ideavimrc ~/
-
+cp .vimrc ~/
 
 cd ~
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
