@@ -463,4 +463,10 @@ let g:coc_explorer_global_presets = {
 
 let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-prettier', 'coc-actions', 'coc-rust-analyzer', 'coc-python', 'coc-tsserver', 'coc-eslint']
 
+" neovide
+let g:neovide_refresh_rate=144
+let g:neovide_cursor_animation_length=0
+let g:neovide_cursor_trail_length=0
+let g:neovide_cursor_antialiasing=v:true
+let g:neovide_cursor_vfx_mode = v:false
 
