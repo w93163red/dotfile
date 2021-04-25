@@ -16,6 +16,8 @@ nnoremap <Space>lr :action Run<CR>
 " format the current paragraph
 vmap Q gq
 nmap Q gqap
+map H ^
+map L $
 " key bindings for quickly moving between windows
 " h left, l right, k up, j down
 nnoremap <c-h> :action PreviousTab<cr>
