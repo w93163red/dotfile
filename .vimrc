@@ -2,10 +2,8 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
-" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'mkitt/tabline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'dyng/ctrlsf.vim'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
@@ -17,18 +15,18 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vista.vim'
+Plug 'tpope/vim-sleuth'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
-" Plug 'ap/vim-buftabline'
 Plug 'airblade/vim-gitgutter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'ciaranm/detectindent'
 Plug 'mhinz/vim-startify'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'qpkorr/vim-bufkill'
-Plug 'akinsho/nvim-bufferline.lua'
+Plug 'akinsho/nvim-bufferline.lua' 
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 " colorscheme
 colorscheme base16-default-dark
@@ -80,15 +78,15 @@ filetype plugin on
 syntax enable
 set showcmd
 set hidden
-set smartindent
 set incsearch
 set hlsearch
 set formatoptions-=cro
-set tabstop=4
-set shiftwidth=4
+" set tabstop=4
+" set shiftwidth=4
 set smarttab
 set expandtab
-" set showtabline=2
+set cindent
+set showtabline=2
 set mouse=a
 set nobackup
 set nowritebackup
@@ -96,13 +94,12 @@ set cmdheight=2
 set updatetime=50
 set synmaxcol=200
 set scrolloff=5
-set signcolumn=yes
 set laststatus=2
 set termguicolors
 hi LineNr ctermbg=NONE guibg=NONE
 " hi Pmenu ctermbg=NONE guibg=NONE
 set nowrap
-set signcolumn=yes
+set signcolumn=number
 set encoding=utf-8
 set vb t_vb= " No more beeps
 set ttyfast
@@ -115,7 +112,6 @@ au CursorHold * checktime
 set shortmess+=c
 set lazyredraw
 set splitright
-autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
 " save the last edit position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 " Enable true color 启用终端24位色
@@ -314,7 +310,7 @@ let g:rustfmt_autosave=1
 nnoremap <silent> <c-p> :GFiles <CR>
 
 "autoindent
-autocmd BufReadPost * :DetectIndent 
+" autocmd BufReadPost * :DetectIndent
 
 " git 
 nnoremap <leader>gs :Gstatus<CR>
@@ -461,7 +457,7 @@ let g:coc_explorer_global_presets = {
 \   },
 \ }
 
-let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-prettier', 'coc-actions', 'coc-rust-analyzer', 'coc-python', 'coc-tsserver', 'coc-eslint']
+let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-actions', 'coc-rust-analyzer', 'coc-python', 'coc-tsserver', 'coc-eslint']
 
 " neovide
 let g:neovide_refresh_rate=144
@@ -469,4 +465,8 @@ let g:neovide_cursor_animation_length=0
 let g:neovide_cursor_trail_length=0
 let g:neovide_cursor_antialiasing=v:true
 let g:neovide_cursor_vfx_mode = v:false
+
+
+" disable the default html indent
+au FileType html,htmldjango setlocal indentexpr=
 
