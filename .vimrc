@@ -45,7 +45,7 @@ nmap <leader>cc   <Plug>NERDCommenterToggle
 vmap <leader>cc   <Plug>NERDCommenterToggle<CR>gv
 nnoremap ]b :bn!<CR>
 nnoremap [b :bp!<CR>
-nnoremap <space>b :Buffers<CR>
+nnoremap <space>b <cmd>Telescope buffers<CR>
 nnoremap <leader>bd :BD<CR>
 nnoremap <space>ss :CocCommand session.save<CR>
 nnoremap <space>sl :CocCommand session.load<CR>
@@ -73,7 +73,7 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 xnoremap p pgvy
 if has('vim')
-  set <a-cr>=^[^M
+set <a-cr>=^[^M
 endif
 map <F8> :Vista!!<CR>
 map <F5> :e!<CR>
@@ -186,14 +186,14 @@ let g:clap_theme = 'material_design_dark'
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -219,11 +219,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-  else
-      call CocAction('doHover')
-  endif
+if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+else
+    call CocAction('doHover')
+endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
@@ -237,11 +237,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+autocmd!
+" Setup formatexpr specified filetype(s).
+autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+" Update signature help on jump placeholder
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
@@ -275,7 +275,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 function! CocCurrentFunction()
-  return get(b:, 'coc_current_function', '')
+return get(b:, 'coc_current_function', '')
 endfunction
 
 " Using CocList
@@ -303,9 +303,9 @@ nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
 
 function! s:GrepArgs(...)
-  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
-        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
-  return join(list, "\n")
+let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+      \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+return join(list, "\n")
 endfunction
 
 " Keymapping for grep word under cursor with interactive mode
@@ -334,17 +334,17 @@ let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#fnamemod = 'default'
 let g:airline_detect_modified=1
 let g:airline#extensions#tabline#buffer_idx_format = {
-        \ '0': '0 ',
-        \ '1': '1 ',
-        \ '2': '2 ',
-        \ '3': '3 ',
-        \ '4': '4 ',
-        \ '5': '5 ',
-        \ '6': '6 ',
-        \ '7': '7 ',
-        \ '8': '8 ',
-        \ '9': '9 '
-        \}
+      \ '0': '0 ',
+      \ '1': '1 ',
+      \ '2': '2 ',
+      \ '3': '3 ',
+      \ '4': '4 ',
+      \ '5': '5 ',
+      \ '6': '6 ',
+      \ '7': '7 ',
+      \ '8': '8 ',
+      \ '9': '9 '
+      \}
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -369,52 +369,52 @@ let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status
 " gutentags
 let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 let g:gutentags_ctags_exclude = [
-      \ '*.git', '*.svg', '*.hg',
-      \ 'build',
-      \ 'dist',
-      \ '*sites/*/files/*',
-      \ 'bin',
-      \ 'node_modules',
-      \ 'bower_components',
-      \ 'cache',
-      \ 'compiled',
-      \ 'docs',
-      \ 'example',
-      \ 'bundle',
-      \ 'target',
-      \ 'vendor',
-      \ '*.md',
-      \ '*-lock.json',
-      \ '*.lock',
-      \ '*bundle*.js',
-      \ '*build*.js',
-      \ '.*rc*',
-      \ '*.json',
-      \ '*.min.*',
-      \ '*.map',
-      \ '*.bak',
-      \ '*.zip',
-      \ '*.pyc',
-      \ '*.class',
-      \ '*.sln',
-      \ '*.Master',
-      \ '*.csproj',
-      \ '*.tmp',
-      \ '*.csproj.user',
-      \ '*.cache',
-      \ '*.pdb',
-      \ 'tags*',
-      \ 'cscope.*',
-      \ '*.css',
-      \ '*.less',
-      \ '*.scss',
-      \ '*.exe', '*.dll',
-      \ '*.mp3', '*.ogg', '*.flac',
-      \ '*.swp', '*.swo',
-      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx'
-      \ ]
+    \ '*.git', '*.svg', '*.hg',
+    \ 'build',
+    \ 'dist',
+    \ '*sites/*/files/*',
+    \ 'bin',
+    \ 'node_modules',
+    \ 'bower_components',
+    \ 'cache',
+    \ 'compiled',
+    \ 'docs',
+    \ 'example',
+    \ 'bundle',
+    \ 'target',
+    \ 'vendor',
+    \ '*.md',
+    \ '*-lock.json',
+    \ '*.lock',
+    \ '*bundle*.js',
+    \ '*build*.js',
+    \ '.*rc*',
+    \ '*.json',
+    \ '*.min.*',
+    \ '*.map',
+    \ '*.bak',
+    \ '*.zip',
+    \ '*.pyc',
+    \ '*.class',
+    \ '*.sln',
+    \ '*.Master',
+    \ '*.csproj',
+    \ '*.tmp',
+    \ '*.csproj.user',
+    \ '*.cache',
+    \ '*.pdb',
+    \ 'tags*',
+    \ 'cscope.*',
+    \ '*.css',
+    \ '*.less',
+    \ '*.scss',
+    \ '*.exe', '*.dll',
+    \ '*.mp3', '*.ogg', '*.flac',
+    \ '*.swp', '*.swo',
+    \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+    \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+    \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx'
+    \ ]
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', '.git']
 
