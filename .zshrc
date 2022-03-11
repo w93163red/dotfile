@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$HOME/.cargo/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/go/bin:$HOME/.local/bin:$RVT_DIR/scripts:$RVT_DIR/scripts/bin:/snap/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -34,7 +34,7 @@ ZSH_THEME="ys"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -73,6 +73,7 @@ plugins=(
   git 
   extract
   zsh-syntax-highlighting
+  fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -104,6 +105,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias devbox="ssh root@10.231.250.15"
 alias boe="ssh ling@10.231.25.211"
+alias jump="ssh ling@10.72.8.11"
+alias jumpbox='ssh lingxiang.wang@jump-us.byted.org'
+alias dev_sg="ssh lingxiang.wang@10.251.243.181"
 alias ls=exa
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -113,5 +117,20 @@ alias vim='nvim'
 alias update_sub="git submodule update --recursive --remote"
 alias git_push='git push origin HEAD:refs/for/master'
 alias git_wip='git push origin HEAD:refs/for/master%wip'
-
+alias k='minikube kubectl --'
+export GO111MODULE=on
+# go mod 代理地址
+export GOPROXY=https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct
+# go13 注释掉 gonoproxy 避免对私有库校验 checksum
+# export GONOPROXY=code.byted.org,gitlab.everphoto.cn,git.byted.org,sysrepo.byted.org
+export GOPRIVATE=*.byted.org,*.everphoto.cn,git.smartisan.com
+export GOSUMDB=sum.golang.google.cn
+export Z3_DIR=$HOME/code/rvt-dep/z3-4.8.7-x64-ubuntu-16.04
+alias spire-server="sudo /opt/tiger/spire-server/bin/spire-server"
+export LLVM_VERSION=10
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_301
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+export VCPKG_ROOT=$HOME/code/vcpkg
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
