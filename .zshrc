@@ -73,7 +73,7 @@ plugins=(
   git 
   extract
   zsh-syntax-highlighting
-  fzf-tab
+  fzf
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -131,6 +131,5 @@ export LLVM_VERSION=10
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_301
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export VCPKG_ROOT=$HOME/code/vcpkg
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+
 
