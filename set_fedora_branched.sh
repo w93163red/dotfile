@@ -1,7 +1,7 @@
 #/bin/sh
 # dnf configure
-echo "fastestmirror=1" >> /etc/dnf/dnf.conf
-echo "max_parallel_downloads=20" >> /etc/dnf/dnf.conf
+sudo echo "fastestmirror=1" >> /etc/dnf/dnf.conf
+sudo echo "max_parallel_downloads=20" >> /etc/dnf/dnf.conf
 
 sudo dnf upgrade --refresh
 sudo dnf install dnf-plugin-system-upgrade
