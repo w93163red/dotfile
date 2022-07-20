@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias devbox="ssh root@10.231.250.15"
+alias devbox="ssh lingxiang.wang@10.231.7.7"
 alias boe="ssh ling@10.231.25.211"
 alias jump="ssh ling@10.72.8.11"
 alias jumpbox='ssh lingxiang.wang@jump-us.byted.org'
