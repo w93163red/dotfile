@@ -3,7 +3,7 @@
 cp .zshrc ~/
 cp .tmux.conf .tmux.conf.local ~/
 mkdir -p ~/.config/nvim
-cp init.vim ~/.config/nvim
+cp coc-settings.json init.vim ~/.config/nvim
 cp .ideavimrc ~/
 cp .vimrc ~/
 
@@ -19,6 +19,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 source ~/.zshrc
-cargo install exa bat
-nvm install --lts
+
+
 

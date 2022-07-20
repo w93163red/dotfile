@@ -2,27 +2,18 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
-" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'mkitt/tabline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'dyng/ctrlsf.vim'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
-Plug 'rust-lang/rust.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'chriskempson/base16-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'liuchengxu/vista.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
-" Plug 'ap/vim-buftabline'
 Plug 'airblade/vim-gitgutter'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ciaranm/detectindent'
@@ -32,12 +23,15 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 " colorscheme
 colorscheme base16-default-dark
 " keymap
-nnoremap <space>fT :CocCommand explorer --sources=buffer+,file+<CR>
+" nnoremap <space>fT :CocCommand explorer --sources=buffer+,file+<CR>
+nnoremap <space>fT :NvimTreeToggle<CR>
 nnoremap <space>fh :History<CR>
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
@@ -78,7 +72,6 @@ endif
 map <F8> :Vista!!<CR>
 map <F5> :e!<CR>
 tnoremap <Esc> <C-\><C-n>
-nnoremap <F12> :vsplit term://zsh<CR> :vertical resize -10<CR>
 " vim setting
 filetype plugin on
 syntax enable
@@ -366,58 +359,6 @@ let g:neovide_cursor_vfx_mode = "pixiedust"
 let g:asyncrun_status = ''
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
-" gutentags
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
-let g:gutentags_ctags_exclude = [
-    \ '*.git', '*.svg', '*.hg',
-    \ 'build',
-    \ 'dist',
-    \ '*sites/*/files/*',
-    \ 'bin',
-    \ 'node_modules',
-    \ 'bower_components',
-    \ 'cache',
-    \ 'compiled',
-    \ 'docs',
-    \ 'example',
-    \ 'bundle',
-    \ 'target',
-    \ 'vendor',
-    \ '*.md',
-    \ '*-lock.json',
-    \ '*.lock',
-    \ '*bundle*.js',
-    \ '*build*.js',
-    \ '.*rc*',
-    \ '*.json',
-    \ '*.min.*',
-    \ '*.map',
-    \ '*.bak',
-    \ '*.zip',
-    \ '*.pyc',
-    \ '*.class',
-    \ '*.sln',
-    \ '*.Master',
-    \ '*.csproj',
-    \ '*.tmp',
-    \ '*.csproj.user',
-    \ '*.cache',
-    \ '*.pdb',
-    \ 'tags*',
-    \ 'cscope.*',
-    \ '*.css',
-    \ '*.less',
-    \ '*.scss',
-    \ '*.exe', '*.dll',
-    \ '*.mp3', '*.ogg', '*.flac',
-    \ '*.swp', '*.swo',
-    \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-    \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-    \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx'
-    \ ]
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json', '.git']
-
 " tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
@@ -462,7 +403,7 @@ let g:coc_explorer_global_presets = {
 \   },
 \ }
 
-let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-prettier', 'coc-actions', 'coc-rust-analyzer', 'coc-tsserver', 'coc-eslint']
+let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-lists', 'coc-prettier', 'coc-actions', 'coc-rust-analyzer', 'coc-go']
 
 " neovide
 let g:neovide_refresh_rate=144

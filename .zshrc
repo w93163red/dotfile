@@ -120,7 +120,7 @@ alias git_wip='git push origin HEAD:refs/for/master%wip'
 alias k='minikube kubectl --'
 export GO111MODULE=on
 # go mod 代理地址
-export GOPROXY=https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct
+# export GOPROXY=https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct
 # go13 注释掉 gonoproxy 避免对私有库校验 checksum
 # export GONOPROXY=code.byted.org,gitlab.everphoto.cn,git.byted.org,sysrepo.byted.org
 export GOPRIVATE=*.byted.org,*.everphoto.cn,git.smartisan.com
