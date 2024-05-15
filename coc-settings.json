@@ -1,0 +1,20 @@
+{
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "rust",
+    "css",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "typescript.tsx"
+  ],
+  "rust-analyzer.lens.enable": true,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "rust-analyzer.checkOnSave.enable": true,
+  "rust-analyzer.procMacro.enable": true,
+  "explorer.buffer.showHiddenBuffers": true,
+  "explorer.icon.enableNerdfont": true
+}

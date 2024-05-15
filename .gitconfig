@@ -1,0 +1,11 @@
+[user]
+	name = LinG
+	email = w93163red@gmail.com
+[alias]
+	co = checkout
+	cp = cherry-pick
+	st = status
+	cin = commit --amend --no-edit
+[core]
+	editor=nvim
+
