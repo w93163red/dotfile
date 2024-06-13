@@ -16,5 +16,6 @@
   "rust-analyzer.checkOnSave.enable": true,
   "rust-analyzer.procMacro.enable": true,
   "explorer.buffer.showHiddenBuffers": true,
-  "explorer.icon.enableNerdfont": true
+  "explorer.icon.enableNerdfont": true,
+  "suggest.noselect": true
 }
