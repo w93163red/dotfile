@@ -108,7 +108,7 @@ alias boe="ssh ling@10.231.25.211"
 alias jump="ssh ling@10.72.8.11"
 alias jumpbox='ssh lingxiang.wang@jump-us.byted.org'
 alias dev_sg="ssh lingxiang.wang@10.251.243.181"
-alias ls=exa
+alias ls=eza
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
