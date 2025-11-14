@@ -103,11 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias devbox="ssh lingxiang.wang@10.231.7.7"
-alias boe="ssh ling@10.231.25.211"
-alias jump="ssh ling@10.72.8.11"
-alias jumpbox='ssh lingxiang.wang@jump-us.byted.org'
-alias dev_sg="ssh lingxiang.wang@10.251.243.181"
 alias ls=eza
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -118,16 +113,6 @@ alias update_sub="git submodule update --recursive --remote"
 alias git_push='git push origin HEAD:refs/for/master'
 alias git_wip='git push origin HEAD:refs/for/master%wip'
 alias k='minikube kubectl --'
-export GO111MODULE=on
-# go mod 代理地址
-# export GOPROXY=https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct
-# go13 注释掉 gonoproxy 避免对私有库校验 checksum
-# export GONOPROXY=code.byted.org,gitlab.everphoto.cn,git.byted.org,sysrepo.byted.org
-export GOPRIVATE=*.byted.org,*.everphoto.cn,git.smartisan.com
-export GOSUMDB=sum.golang.google.cn
-export Z3_DIR=$HOME/code/rvt-dep/z3-4.8.7-x64-ubuntu-16.04
-alias spire-server="sudo /opt/tiger/spire-server/bin/spire-server"
-export LLVM_VERSION=10
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_301
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export VCPKG_ROOT=$HOME/code/vcpkg
