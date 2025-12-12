@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/go/bin:$HOME/.local/bin:$RVT_DIR/scripts:$RVT_DIR/scripts/bin:/snap/bin:$PATH"
+export PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/go/bin:$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -92,9 +92,6 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -109,12 +106,7 @@ export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . /usr/share/autojump/autojump.sh
 alias vim='nvim'
-alias update_sub="git submodule update --recursive --remote"
-alias git_push='git push origin HEAD:refs/for/master'
-alias git_wip='git push origin HEAD:refs/for/master%wip'
 alias k='minikube kubectl --'
-export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_301
-export CARGO_NET_GIT_FETCH_WITH_CLI=true
-export VCPKG_ROOT=$HOME/code/vcpkg
+
 
 
