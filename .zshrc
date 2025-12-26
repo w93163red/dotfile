@@ -106,7 +106,17 @@ export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . /usr/share/autojump/autojump.sh
 alias vim='nvim'
-alias k='minikube kubectl --'
-
+alias k='kubectl'
+source <(kubectl completion zsh)
+function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        yazi "$@" --cwd-file="$tmp"
+        IFS= read -r -d '' cwd < "$tmp"
+        [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+        rm -f -- "$tmp"
+}
+zle -N y
+bindkey '^Y' y
+export EDITOR=nvim
 
 
