@@ -74,6 +74,7 @@ plugins=(
   extract
   zsh-syntax-highlighting
   fzf
+  fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
