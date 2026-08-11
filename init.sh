@@ -6,6 +6,8 @@ mkdir -p ~/.config/nvim
 cp coc-settings.json init.vim ~/.config/nvim
 cp .ideavimrc ~/
 cp .vimrc ~/
+mkdir -p ~/.config/herdr/
+cp herdr_config.toml ~/.config/herdr/config.toml
 
 cd ~
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

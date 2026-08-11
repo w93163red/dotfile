@@ -119,5 +119,5 @@ function y() {
 zle -N y
 bindkey '^Y' y
 export EDITOR=nvim
-
+alias cy='claude --permission-mode auto'
 

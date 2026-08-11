@@ -1,0 +1,21 @@
+onboarding = false
+[ui.sound.agents]
+claude = "off"
+
+[ui]
+agent_panel_sort = "spaces"
+
+[keys]
+prefix = "ctrl+a"
+
+[ui.sidebar.agents.rows_by_agent]
+claude = [
+  ["state_icon", "agent", "state_text"],
+  ["workspace", "tab"],
+]
+
+[ui.sound]
+enabled = false
+
+[ui.toast]
+delivery = "terminal"
