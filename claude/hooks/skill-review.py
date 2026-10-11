@@ -79,12 +79,7 @@ is a valid outcome, just not the default one."""
 
 
 def interactive_session() -> bool:
-    """Skip cron/headless runs, which would burn tokens per tick.
-
-    Claude Code sets CLAUDE_CODE_SESSION_ATTENDED=1 for the terminal TUI and for
-    desktop/IDE/remote frontends, and 0 for `claude -p` and background sessions.
-    Older versions don't set it, so fall back to sniffing the terminal.
-    """
+    """Best-effort: skip cron/headless runs, which would burn tokens per tick."""
     attended = os.environ.get("CLAUDE_CODE_SESSION_ATTENDED")
     if attended is not None:
         return attended == "1"
