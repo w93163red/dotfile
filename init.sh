@@ -8,6 +8,8 @@ cp .ideavimrc ~/
 cp .vimrc ~/
 mkdir -p ~/.config/herdr/
 cp herdr_config.toml ~/.config/herdr/config.toml
+mkdir -p ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/warp-edit
+cp warp-edit/warp-edit.plugin.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/warp-edit/
 
 mkdir -p ~/.claude/hooks ~/.claude/scripts
 cp claude/hooks/skill-review.py ~/.claude/hooks/

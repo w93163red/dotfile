@@ -76,6 +76,7 @@ plugins=(
   zsh-syntax-highlighting
   fzf
   fzf-tab
+  warp-edit
 )
 
 source $ZSH/oh-my-zsh.sh
