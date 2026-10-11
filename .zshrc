@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$HOME/.cargo/bin:/usr/local/bin:/usr/local/go/bin:$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
@@ -105,7 +106,8 @@ alias ls=eza
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. /usr/share/autojump/autojump.sh
+[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 alias vim='nvim'
 alias k='kubectl'
 source <(kubectl completion zsh)

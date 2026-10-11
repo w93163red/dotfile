@@ -1,0 +1,19 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/skill-review.py\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
